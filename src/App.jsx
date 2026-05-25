@@ -9,7 +9,7 @@ import {
 import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
 import TeamShow from "./components/TeamShow";
-// import Signup from "./containers/Signup";
+import Signup from "./containers/signup";
 import Login from "./containers/login";
 import About from "./components/About";
 import UserProfile from "./containers/UserProfile";
@@ -153,7 +153,10 @@ class App extends React.Component {
               exact path="/about" component={About}
             />
           <Switch>
-          <Route exact path="/" render={() => <Redirect to="/login"/>}/>
+          <Route exact path="/" render={() => <Redirect to="/users/sign_up"/>}/>
+          <Route exact path="/users/sign_up" render={() => {
+              return this.state.currentUser ? <Redirect to="/profile"/> : <Signup signUpHandler={this.signUpHandler}/>
+            }} />
           <Route exact path="/profile" render={() => {
               return this.state.currentUser ? <UserProfile user={this.state.currentUser}/> :
               <Redirect to="/login"/>
